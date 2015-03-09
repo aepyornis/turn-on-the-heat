@@ -15,7 +15,10 @@ function add_circle_to_map(complaint) {
     var path_options = {
       radius: 5
     }
-    L.circleMarker(lat_lng, path_options).addTo(map);
+    var popup_content = complaint.incident_address + ', ' + complaint.borough + '<br>' + complaint.created_date;
+    
+    L.circleMarker(lat_lng, path_options).bindPopup(popup_content).addTo(map);
   }
 }
+
 
