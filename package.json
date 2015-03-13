@@ -16,9 +16,8 @@
     "url": "https://github.com/aepyornis/turn-on-the-heat/issues"
   },
   "dependencies": {
-    "connect": "~3.3.4",
     "date-utils": "^1.2.16",
     "request": "^2.53.0",
-    "serve-static": "~1.9.1"
+    "express": "~4.12.2"
   }
 }

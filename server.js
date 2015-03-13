@@ -1,35 +1,39 @@
 var fs = require('fs');
 var express = require('express');
+var path = require('path');
 var download_complaints = require('./download_complaints');
 require('date-utils');
+// load complaints 
+var complaints = load_complaints(Date.yesterday().toFormat('YYYY-MM-DD'));
+var routes = require('./routes/index');
 
 var app = express();
 
-var complaints;
-
-load_complaints('2015-03-09');
-
-app.use('/complaints', function(req,res,next){
-  res.writeHead(200, {"Content-Type": "application/json"});
-  res.send(JSON.strinigfy(complaints));
-})
+// view engine setup
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'jade');
 
 // serve static files from public folder
-app.use(serveStatic(__dirname + '/public'));
+app.use(express.static(path.join(__dirname, 'public')));
+
+// routes
+app.use('/', routes);
+
 //start server
 app.listen(8080);
 
-// date
-function load_complaints(yesterday) {
-  fs.readFile((yesterday + '.txt'), function(err, data) {
+//  'YYYY-MM-DD' -> []
+// downloads the complaints  or loads them from file
+function load_complaints(date) {
+  fs.readFile(('./data/' + date + '.txt'), function(err, data) {
       if (err) {
           console.log('no file...starting to download')
-          download_complaints(Date.yesterday().toFormat('YYYY-MM-DD'), function(arr){
-              complaints = arr; 
+          download_complaints(date, function(arr){
+              return arr;
           })
       } else {
           console.log('already downloaded these');
-          complaints = JSON.parse(data);
+          return JSON.parse(data);
       }
   })
 }
