@@ -11,3 +11,10 @@ https://data.cityofnewyork.us/resource/erm2-nwe9.json?$select=unique_key,%20crea
 http://www1.nyc.gov/site/hpd/renters/important-safety-issues-heat-hot-water.page
 
 Oct. 1 and May 31
+
+GET /resource/ijzp-q8t2.json?$select=count(*)&$where=updated_on%20%3E=%20'2014-02-27T00:00:00'%20AND%20updated_on%20%3C%20'2014-02-28T00:00:00'     
+
+
+https://data.cityofnewyork.us/resource/erm2-nwe9.json?$select=count(*)&$WHERE=agency='HPD' AND created_date >= '2014-10-01T00:00:00' AND complaint_type = 'HEAT/HOT WATER' 
+
+https://data.cityofnewyork.us/resource/erm2-nwe9.json?$select=count(*)&$where=
