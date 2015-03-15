@@ -18,3 +18,5 @@ GET /resource/ijzp-q8t2.json?$select=count(*)&$where=updated_on%20%3E=%20'2014-0
 https://data.cityofnewyork.us/resource/erm2-nwe9.json?$select=count(*)&$WHERE=agency='HPD' AND created_date >= '2014-10-01T00:00:00' AND complaint_type = 'HEAT/HOT WATER' 
 
 https://data.cityofnewyork.us/resource/erm2-nwe9.json?$select=count(*)&$where=
+
+https://data.cityofnewyork.us/resource/erm2-nwe9.csv?$select=unique_key, created_date, closed_date, descriptor, incident_zip, incident_address, city, borough, status, latitude, longitude &$WHERE=agency='HPD' AND created_date >= '2014-10-01T00:00:00' AND complaint_type = 'HEAT/HOT WATER' 
