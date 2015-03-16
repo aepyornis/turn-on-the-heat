@@ -13,9 +13,9 @@ def trim(str):
 def json_to_csv(complaint):
   string = ''
   string += (complaint['unique_key'] + ',')
-  string += (complaint['created_date'] + ',')
-  string += (complaint['status'] + ',')
-  string += ("'" + trim(complaint['incident_address']) + "'" + ",")
+  string += ("'" + complaint['created_date'] + "',")
+  string += ("'" + complaint['status'] + "',")
+  string += ("'" + trim(complaint['incident_address']) + "',")
   string += (complaint['incident_zip'] + ',')
   string += (complaint['longitude'] + ',')
   string += (complaint['latitude'] + ',')
@@ -30,31 +30,35 @@ def geocode(address, borough):
   geocode_result = g.address(street_num, street_name, borough)
 
   if 'bbl' in geocode_result:
-    print geocode_result['bbl']
+    print geocode_result['bbl'] + " - " + address
     return geocode_result['bbl']
   else:
     print 'NULL'
     return 'NULL'
 
-
-def write_csv(filepath):
+# string (filename) -> saves csv to './data/csv'
+def write_csv(filename):
   # open file
-  f = open('./data/json/' + filepath, 'r')
+  f = open('./data/json/' + filename, 'r')
   # open csv file
-  csv_filepath = './data/csv/' + filepath[:10] + '.csv'
-  w = open(csv_filepath, 'w')
+  csv_filepath = './data/csv/' + filename[:10] + '.csv'
+  if (os.path.isfile(csv_filepath)):
+    return
+  else:
+    w = open(csv_filepath, 'w')
 
-  complaints = json.load(f)
+    complaints = json.load(f)
 
-  for complaint in complaints:
-    csv = json_to_csv(complaint)
-    csv += geocode(complaint['incident_address'], complaint['borough'])
-    csv += '\n'
-    w.write(csv)
+    for complaint in complaints:
+      csv = json_to_csv(complaint)
+      csv += geocode(complaint['incident_address'], complaint['borough'])
+      csv += '\n'
+      w.write(csv)
 
-  w.close()
+    w.close()
 
 
-# ls = os.listdir('./data/json')
+jsons = os.listdir('./data/json')
 
-write_csv('2015-01-01.txt')
+for j in jsons:
+  write_csv(j)
