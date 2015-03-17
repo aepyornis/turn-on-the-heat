@@ -3,7 +3,8 @@ from nyc_geoclient import Geoclient
 import os
 
 # geoclienet api tokens and setup
-g = Geoclient('API ID', 'API TOKEN')
+
+g = Geoclient('a24f63ab', '47bd8f72f07c547b4cfc72e7f0a6ad67')
 
 # string -> string
 def trim(str):
@@ -11,14 +12,23 @@ def trim(str):
 
 # dict -> string
 def json_to_csv(complaint):
+
+  def handle_null(key, quotes):
+    if key in complaint and quotes:
+      return ("'" + complaint[key] + "',")
+    elif key in complaint:
+      return (complaint[key] + ",")
+    else:
+      return "NULL,"
+
   string = ''
   string += (complaint['unique_key'] + ',')
-  string += ("'" + complaint['created_date'] + "',")
-  string += ("'" + complaint['status'] + "',")
-  string += ("'" + trim(complaint['incident_address']) + "',")
-  string += (complaint['incident_zip'] + ',')
-  string += (complaint['longitude'] + ',')
-  string += (complaint['latitude'] + ',')
+  string += handle_null('created_date', True)
+  string += handle_null('status', True)
+  string += handle_null('incident_address', True)
+  string += handle_null('incident_zip', False)
+  string += handle_null('longitude', False)
+  string += handle_null('latitude', False)
   return string
 
 # string (address), string (borough) -> string (bbl)
@@ -36,8 +46,10 @@ def geocode(address, borough):
     print 'NULL'
     return 'NULL'
 
+
 # string (filename) -> saves csv to './data/csv'
 def write_csv(filename):
+  print "converting " + filename
   # open file
   f = open('./data/json/' + filename, 'r')
   # open csv file
