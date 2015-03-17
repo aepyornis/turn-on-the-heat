@@ -1,4 +1,4 @@
-// downloads data from NYC open data
+// downloads heat/hot water complaints data from NYC open data
 require('date-utils');
 var fs = require('fs');
 var request = require('request');
@@ -16,7 +16,6 @@ function download_days_since(date) {
         })
     })
 }
-
 
 // string -> [string]
 // returns array of dates in 'YYYY-MM-DD' from a certain date until today. 

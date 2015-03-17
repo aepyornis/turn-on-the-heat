@@ -1,7 +1,7 @@
 {
   "name": "turn-on-the-heat",
   "version": "0.0.1",
-  "description": "",
+  "description": "Displaying, analyzing, visualizing and investigating heat & hot water complaints in New York City.",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

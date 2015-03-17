@@ -21,11 +21,12 @@ app.use('/', routes);
 
 //start server
 app.listen(8080);
-console.log('server started');
+console.log('server started at localhost:8080');
+
 //  'YYYY-MM-DD' -> []
 // downloads the complaints  or loads them from file
 function load_complaints(date) {
-  fs.readFile(('./data/' + date + '.txt'), function(err, data) {
+  fs.readFile(('./data/json/' + date + '.txt'), function(err, data) {
       if (err) {
           console.log('no file...starting to download')
           utils.download_complaints(date, function(arr){

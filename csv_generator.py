@@ -3,7 +3,7 @@ from nyc_geoclient import Geoclient
 import os
 
 # geoclienet api tokens and setup
-g = Geoclient('a24f63ab', '47bd8f72f07c547b4cfc72e7f0a6ad67')
+g = Geoclient('API ID', 'API TOKEN')
 
 # string -> string
 def trim(str):

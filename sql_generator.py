@@ -6,7 +6,6 @@ def insert_statement(line):
 create_table = """CREATE TABLE complaints (
   uniquekey integer PRIMARY KEY,
   created_date timestamp,
-  closed_date timestamp,
   status text,
   address text,
   zip integer,
