@@ -1,7 +1,16 @@
 import glob
+import re
+
+# string -> string
+def double_quotes(line):
+  match = re.search("[^,](')[^,]", line)
+  if match:
+    return line[:(match.start() + 1)] + "''" + line[(match.end() - 1):]
+  else:
+    return line
 
 def insert_statement(line):
-  return 'INSERT INTO complaints VALUES (' + line + ');\n'
+  return 'INSERT INTO complaints VALUES (' + double_quotes(line) + ');\n'
 
 create_table = """CREATE TABLE complaints (
   uniquekey integer PRIMARY KEY,
@@ -29,4 +38,5 @@ for path in list_of_files:
     sql_file.write(insert_statement(line))
 
 sql_file.close()
+
 
