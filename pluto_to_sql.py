@@ -1,5 +1,6 @@
 # pluto to SQL
 import glob
+import csv
 
 create_table = """CREATE TABLE pluto (
     cd integer,
@@ -8,7 +9,7 @@ create_table = """CREATE TABLE pluto (
     numfloords integer,
     unitsres integer,
     yearbuilt integer,
-    bbl integer
+    bbl numeric
 );"""
 
 # num, string -> string
@@ -23,12 +24,11 @@ def double_quotes(index, field):
 
 # string -> string
 # reduces and modifies one row and generates an INSERT statment
-def insert_statement(line):
-    fields = line.split(',')
+def insert_statement(row):
     # select these fields from pluto
     # CD, BldgClass, OwnerName, NumFloors, UnitsRes, YearBuilt, BBL
     selected = [3, 25, 29, 42, 43, 58, 69]
-    reduced = [fields[i] for i in selected]
+    reduced = [row[i] for i in selected]
     # double quotes for sql
     doubled = [double_quotes(index, field) for index, field in enumerate(reduced)]
 
@@ -40,8 +40,10 @@ def csv_to_sql(filepath):
     with open(filepath) as f:
         # ignores first line
         next(f)
-        for line in f:
-            sql_file.write(insert_statement(line))
+        # handles file as CSV
+        reader = csv.reader(f, delimiter=',', quotechar='"')
+        for row in reader:
+            sql_file.write(insert_statement(row))
 
 # get all pluto csvs
 list_of_files = glob.glob('./data/pluto/*.csv')
