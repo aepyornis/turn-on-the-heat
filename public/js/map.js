@@ -1,29 +1,45 @@
+//create map
 var map = L.map('map', {
   center: [40.716065, -73.930243],
-  zoom: 12
+  zoom: 11,
+  minZoom: 10,
+  maxZoom: 15
 })
 
-L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
-    attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-}).addTo(map);
+// open street map layer
+var osm = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+    attribution: '<a href="http://osm.org/copyright">OpenStreetMap</a>',
+    opacity: 0.6
+});
+
+//heat complaints layer
+var heat = L.tileLayer('http://elephant-bird.net/tiles/heat/{z}/{x}/{y}.png', {minZoom: 10, maxZoom: 15});
+
+// utfgrid with heat data
+var heatGrid = new L.UtfGrid('http://elephant-bird.net/tiles/heat/{z}/{x}/{y}.json?callback={cb}', {});
+
+heatGrid.on('click', function (e) {
+     console.log('click')
+}); 
+
+heatGrid.on('mouseover', function (e) {
+     console.log('mouse')
+});
+heatGrid.on('mouseout', function (e) {
+      
+});
 
 
+map.addLayer(osm)
+map.addLayer(heat)
+map.on('zoomstart', function(e){
+  limit_zoom();
+})
 
-complaints.forEach(add_circle_to_map);
-
-function add_circle_to_map(complaint) {
-  if (complaint.latitude && complaint.latitude) {
-    var lat_lng = [complaint.latitude, complaint.longitude];
-    var path_options = {
-      radius: 5
-    }
-    var popup_content = complaint.incident_address + ', ' + complaint.borough + '<br>' + complaint.created_date;
-    
-    L.circleMarker(lat_lng, path_options).bindPopup(popup_content).addTo(map);
+function limit_zoom() {
+  if (map.getZoom() >= 12 && !map.hasLayer(heatGrid)) {
+    map.addLayer(heatGrid);
+  } else if (map.getZoom() < 12 && map.hasLayer(heatGrid)) {
+    map.removeLayer(heatGrid);
   }
-}
-
-function get_complaints() {
-
-  
 }

@@ -4,7 +4,7 @@ var path = require('path');
 var utils = require('./utils');
 require('date-utils');
 // load complaints 
-var complaints = load_complaints(Date.yesterday().toFormat('YYYY-MM-DD'));
+// var complaints = load_complaints(Date.yesterday().toFormat('YYYY-MM-DD'));
 var routes = require('./routes/index');
 
 var app = express();
@@ -20,7 +20,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', routes);
 
 //start server
-app.listen(8080);
+app.listen(3000);
 console.log('server started at localhost:8080');
 
 //  'YYYY-MM-DD' -> []
