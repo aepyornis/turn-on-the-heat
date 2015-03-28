@@ -29,12 +29,9 @@ var pluto = [
 
 // -> [[Address, bbl, count, jobsOwner, jobsBis, jobDate, plutoOwner, unitsRes]]
 function join () {
-   return  _.map(total_complaints(complaints), function(val, i, list) {
-      var complaint = val;
+   return  _.map(total_complaints(complaints), function(complaint, i, list) {
       var bbl = complaint[1];
-      complaint = complaint.concat(recentJob(bbl).slice(0, 3))
-      complaint = complaint.concat(get_pluto_data(bbl));
-      return complaint;
+      return complaint.concat(recentJob(bbl).slice(0, 3), get_pluto_data(bbl))
     })
 }
 
@@ -45,7 +42,7 @@ function get_pluto_data(bbl) {
 }
 
 // string -> []
-// get most recent based on a bbl
+// get most recent jobs based on a bbl
 function recentJob(bbl) {
   if (_.isEmpty(dob_match(bbl))) {
     return [null, null, null, null];
@@ -65,6 +62,7 @@ function dob_match(bbl) {
 // counts total complaints, consolidates, and adds total_complaints to end
 function total_complaints(complaints) {
   var dict = count_dictionary(complaints);
+
 
   var arr_with_counts = []; 
   _.each(dict, function (count, bbl) {
