@@ -24,15 +24,17 @@ heatGrid.on('click', function (e) {
 }); 
 
 heatGrid.on('mouseover', function (e) {
-     console.log('mouse')
+     var hoverText = '<p>Complaints: ' + e.data.total_comp + '<br>' + 'Address: ' + e.data.address + '</p>';
+     $('#hover-text').html(hoverText)
 });
 heatGrid.on('mouseout', function (e) {
-      
+      $('#hover-text').html('<p>Hover over a dot</p>')
 });
 
 
 map.addLayer(osm)
 map.addLayer(heat)
+$('#hover-text').html('<p>Zoom in to get details</p>')
 map.on('zoomstart', function(e){
   limit_zoom();
 })
@@ -40,7 +42,9 @@ map.on('zoomstart', function(e){
 function limit_zoom() {
   if (map.getZoom() >= 12 && !map.hasLayer(heatGrid)) {
     map.addLayer(heatGrid);
+    $('#hover-text').html('<p>Hover over a dot</p>')
   } else if (map.getZoom() < 12 && map.hasLayer(heatGrid)) {
     map.removeLayer(heatGrid);
+    $('#hover-text').html('<p>Zoom in to hover</p>')
   }
 }

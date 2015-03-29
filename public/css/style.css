@@ -14,7 +14,7 @@
   margin-right: 8px;
   background-color: #fff;
   /* Fallback for web browsers that doesn't support RGBa */
-  background: rgb(0, 0, 0);
+  background: rgb(255, 255, 255);
   /* RGBa with 0.6 opacity */
   background: rgba(255, 255, 255, 0.8);
 }
@@ -39,7 +39,7 @@
   color:#fff;
   position: absolute;
   top: 50%;
-  transform: translateY(-50%)
+  transform: translateY(-50%);
 }
 
 .legend-text {
@@ -78,13 +78,23 @@
   height: 33px;
 }
 
-.sdfasdfcircle{
-  width:100px;
-  height:100px;
-  border-radius:50px;
-  font-size:20px;
-  color:#fff;
-  line-height:100px;
-  text-align:center;
-  background:#000
+#hover {
+
+  min-height: 20px;
+  max-height: 50px;  
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  z-index: 1;
+  padding-left: 14px;
+  padding-right: 8px;
+  margin-bottom: 100px;
+  margin-right: 8px;
+  background-color: #000;
+  /* Fallback for web browsers that doesn't support RGBa */
+  background: rgb(255, 255, 255);
+  /* RGBa with 0.6 opacity */
+  background: rgba(255, 255, 255, 0.8);
+
+
 }
