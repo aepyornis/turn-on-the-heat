@@ -135,4 +135,34 @@ FROM ( SELECT count(complaints.bbl) as total_complaints, complaints.bbl FROM com
 LEFT JOIN (SELECT * FROM (SELECT DISTINCT on (bbl) bbl, ownername, ownerbusinessname, latestactiondate FROM dobjobs ORDER BY bbl) as dob ORDER BY dob.latestactiondate DESC) as jobs ON c.bbl = jobs.bbl
 ORDER BY total_complaints DESC;
 
-
+-- with LAT/LNG
+SELECT c.bbl AS bbl,
+       c.address AS address,
+       jobs.ownername AS jobs_owner,
+       jobs.ownerbusinessname AS jobs_business,
+       jobs.latestactiondate AS jobs_date,
+       pluto.ownername AS pluto_owner,
+       pluto.unitsres AS units_res,
+       c2.longitude AS lng,
+       c2.latitude AS lat,
+       c.total_complaints AS total_complaints
+FROM
+   (SELECT complaints.address,
+          count(complaints.bbl) AS total_complaints,
+          complaints.bbl
+    FROM complaints
+    GROUP BY complaints.address,
+             complaints.bbl) AS c
+    LEFT JOIN
+        (SELECT *
+         FROM
+            (SELECT DISTINCT ON (bbl) bbl,
+                         ownername,
+                         ownerbusinessname,
+                         latestactiondate
+            FROM dobjobs
+            ORDER BY bbl) AS dob
+        ORDER BY dob.latestactiondate DESC ) AS jobs ON c.bbl = jobs.bbl
+LEFT JOIN pluto ON c.bbl = pluto.bbl
+LEFT JOIN (SELECT DISTINCT ON (bbl) bbl, longitude, latitude  FROM complaints) as c2 ON c.bbl = c2.bbl
+ORDER BY total_complaints DESC;

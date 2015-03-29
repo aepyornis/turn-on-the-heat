@@ -21,7 +21,7 @@ app.use('/', routes);
 
 //start server
 app.listen(3000);
-console.log('server started at localhost:8080');
+console.log('server started at localhost:3000');
 
 //  'YYYY-MM-DD' -> []
 // downloads the complaints  or loads them from file

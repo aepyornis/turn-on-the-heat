@@ -3,7 +3,8 @@ var map = L.map('map', {
   center: [40.716065, -73.930243],
   zoom: 11,
   minZoom: 10,
-  maxZoom: 15
+  maxZoom: 15,
+  attributionControl: false
 })
 
 // open street map layer
