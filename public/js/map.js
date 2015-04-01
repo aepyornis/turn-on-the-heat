@@ -51,8 +51,11 @@ function limit_zoom() {
 }
 
 function datatable() {
+  //create table html
   $('#complaints-table').html( '<table cellpadding="0" cellspacing="0" border="0" class="display" id="complaints"></table>' );
-  console.log(top_100)
+  // add classes for bootstrap style
+  $('#complaints').addClass("table table-striped table-condensed table-hover")
+  //do the datatable magic
   $('#complaints').DataTable({
     data: top_100,
     "order": [[ 0, "desc" ]],
