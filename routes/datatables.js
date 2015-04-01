@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var q = require('q');
 var _ = require('underscore');
+var s = require("underscore.string");
 var squel = require('squel')
   squel.useFlavour('postgres');
   squel.mySelect = require('./selectNull'); 
@@ -58,13 +59,46 @@ function do_query(sql) {
             def.reject(err);
             console.log(err);
           }
-          def.resolve(result.rows);
+          def.resolve(psql_to_dt(result.rows));
           done();
         })
       }
   })
   return def.promise;
 }
+
+function psql_to_dt(rows) {
+
+  return _.map(rows, function(row){
+      return change_row(row);
+  })
+
+  function change_row(row) {
+    var newRow = row;
+    if (row.jobs_date) {
+      var date = '' + row.jobs_date;
+      newRow['jobs_date'] = date.slice(4,15);
+    }
+    titleize('address');
+    titleize('pluto_owner');
+    titleize('jobs_owner');
+    titleize('jobs_business');
+    return newRow;
+
+      function titleize(columnName) {
+        if (row[columnName]) {
+            newRow[columnName] = s.titleize(row[columnName].toLowerCase());
+          } else {
+            return;
+        }
+      }
+  }
+
+  
+
+}
+
+
 
 // {dt request object} -> 'sql query'
 function sql_query_builder(dt) {
@@ -102,16 +136,14 @@ function where_exp(dt) {
     var x = squel.expr();
 
     var searchable_columns = _.chain(dt.columns).filter(function(column) {
-      if (column.searchable === 'true') {
-        return true;
-      }
+     return (column.searchable === 'true') ? true : false 
     }).pluck('data').value();
 
     // do global search on searchable columns
     if (dt.search.value){
         _.each(searchable_columns, function(col) {
-          global_search(col)}
-        );
+          global_search(col)
+        });
     }
 
     return x;
@@ -125,4 +157,3 @@ function where_exp(dt) {
 
 
 
- 
