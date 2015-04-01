@@ -1,5 +1,6 @@
 #map {
-  height: 600px;
+  height: 520px;
+  width: 95%;
 }
 
 #legend {
@@ -95,6 +96,17 @@
   background: rgb(255, 255, 255);
   /* RGBa with 0.6 opacity */
   background: rgba(255, 255, 255, 0.8);
+}
+
+#complaints {
+  font-size: 12px;
+}
 
 
+#complaints thead {
+  font-size: 13px;
+}
+
+.end  {
+  padding-bottom: 50px;
 }

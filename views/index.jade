@@ -27,9 +27,16 @@ html(lang='en')
             li.active
               a(href='#') Map
             li
-              a(href='#about') About
+              a(href='#about') Worst Offenders
             li
-              a(href='#contact') More info
+              a(href='#contact') Data
+   .container
+      div
+        h1 Turn on the heat
+        p.lead
+          | New York is full of negligent landlords. 
+          | One major way landlords harass and abuse their tenants is by not providing essential services such as heat and hot water. 
+          | The scale of the problem is huge. This heat season, there have been over 200,000 complaints regarding no heat or hot water.
     .container
       #map
         #hover
@@ -59,17 +66,27 @@ html(lang='en')
               .c7.circle
               p.legend-text >100
     .container
-      div
-        h1 Turn on the heat
-        p.lead
-          | New York is full of negligent landlords. One major way landlords harass and 
-          | <a href="">abuse</a> their tenants is by not providing essential services such as heat and hot water. The scale of the problem is huge. This heat season, there have been over 200,000 complaints regarding no heat or hot water.
-        h3 Complaints yesterday:  #{yesterday}
-        h3 Complaints this week:  #{thisWeek}
-        h3 Since the start of winter: #{winter}
+      h3.text-center Complaints yesterday:  #{yesterday}
+      h3.text-center Complaints this week:  #{thisWeek}
+      h3.text-center Since the start of winter: #{winter}
     .container
-      h1 Top 100 buildings
+      <a name="about"></a>
+      h1 Worst Offenders: The Top 100 buildings
       #complaints-table
+      h2 Heat Complaints
+      p From October 1st and May 1st, property owners <a href="http://www1.nyc.gov/site/hpd/renters/important-safety-issues-heat-hot-water.page" target="_blank">must provide</a> adequate heat. Technically <a href="http://metcouncilonhousing.org/help_and_answers/heat_and_hot_water" target="_blank">landlords can be fined</a> for their negligence, yet they rarely get in trouble for what should be dangerous criminal activity.
+      P When faced with dangerous freezing conditions, tenants have few options: report it to the overworked Department of Housing and Presenvation via 311 and/or attempt to get repairs through our shamefully ineffectual housing court system.
+      <a name="name"></a>
+      h2 About the data
+      h3 Heat complaints:
+      p The 311 complaints are available on <a href="https://data.cityofnewyork.us/Social-Services/311-Service-Requests-from-2010-to-Present/erm2-nwe9" target="_blank">NYC Open Data.</a>
+      h3 Onwership data: Owner Names and LLCs!!?
+      p The <a href="http://www.nyc.gov/html/dcp/html/bytes/applbyte.shtml#pluto" target="_blank">"pluto"</a> data is a dataset published by the New York City Deparment of Planning, which retrives it's ownership information from the Department of Finance. This contains the 'legal' owner name as recorded on <a href="http://a836-acris.nyc.gov/CP/" target="_blank">ACRIS</a>.
+      p However, these are often LLCs or corporations, hiding the names of the people behind the companies. Many Tenants don't even know the 'real' name of the owner of their apartment or who is responsible for not proving them with essential services.
+      p These names come with a cavet: they might not be up-to-date or 100% accurate. The date of the most recent permit (listed as 'DOB source data') should give you a sense of how-up-to-date the information is. Click <a href="http://dobjobs-elephantbird.rhcloud.com/" target="_blank">here</a> for a searchable version of that datasource.
+      h3 What's next?
+      p Check back for more analysis and further investigation into the worst offenders. 
+      p.lead Meanwhile join the chorus of NYC's tenant by telling these landlords to: TURN ON THE HEAT! 
     script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js')
     script(src='js/bootstrap.min.js')
     script(src='js/leaflet.js')
