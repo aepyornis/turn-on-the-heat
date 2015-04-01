@@ -111,6 +111,10 @@
   font-size: 13px;
 }
 
+#full-table {
+  margin: 0 auto;
+}
+
 .end  {
   padding-bottom: 50px;
 }

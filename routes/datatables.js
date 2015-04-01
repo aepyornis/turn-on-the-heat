@@ -5,6 +5,7 @@ var _ = require('underscore');
 var squel = require('squel')
   squel.useFlavour('postgres');
   squel.mySelect = require('./selectNull'); 
+  squel.count = require('./count_squel')
 var pg = require('pg');
   pg.defaults.database = 'heat311';
   pg.defaults.host = 'localhost';
@@ -22,11 +23,21 @@ router.get('/datatables', function(req, res, next){
   
   //create SQL query 
   var sql_query = sql_query_builder(req.query);
+  var countQuery = sql_count_builder(req.query);
 
   var sql_promise = do_query(sql_query)
     .then(function(result){
-      response.data = result;
-      res.send(JSON.stringify(response))
+      response.data = result; 
+  })
+
+  var count_promise = do_query(countQuery)
+    .then(function(result){
+      response.recordsFiltered = result[0].c;
+  })
+
+  q.all([count_promise, sql_promise])
+    .then(function(){
+      res.send(JSON.stringify(response));
   })
           
 })
@@ -76,8 +87,18 @@ function sql_query_builder(dt) {
   query.limit(dt.length).offset(dt.start);
 
   return query.toParam();
+}
 
-   function where_exp(dt) {
+
+function sql_count_builder(dt) {
+  // sequel select object
+  return squel.count()
+    .from('complaints_by_building')
+    .where( where_exp(dt) )
+    .toParam()
+}
+
+function where_exp(dt) {
     var x = squel.expr();
 
     var searchable_columns = _.chain(dt.columns).filter(function(column) {
@@ -94,15 +115,13 @@ function sql_query_builder(dt) {
     }
 
     return x;
+
+    function global_search(columnData) {
+      var sql = columnData + " LIKE ?";
+      var value = "%" + dt.search.value.toUpperCase() + "%";
+      x.or(sql, value);
   }
-
-
 }
-
-
-
-
-
 
 
 

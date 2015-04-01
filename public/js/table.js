@@ -5,11 +5,11 @@ $(document).ready(function() {
 
 function datatable() {
   //create table html
-  $('#complaints-table').html( '<table cellpadding="0" cellspacing="0" border="0" class="display" id="complaints"></table>' );
+  $('#complaints-table').html( '<table cellpadding="0" cellspacing="0" border="0" class="display" id="full-table"></table>' );
   // add classes for bootstrap style
-  $('#complaints').addClass("table table-striped table-condensed table-hover")
+  $('#full-table').addClass("table table-striped table-condensed table-hover")
   //do the datatable magic
-  $('#complaints').DataTable({
+  $('#full-table').DataTable({
     serverSide: true,
     ajax: {
         url: '/datatables',
@@ -19,7 +19,8 @@ function datatable() {
     columns: [
         { 
         "data": "total_complaints",
-        "title": 'Total Complaints'
+        "title": 'Total Complaints',
+        'searchable': false
         },
         { 
           "data": "address",
@@ -40,11 +41,13 @@ function datatable() {
         },
         { 
           "data": "jobs_date",
-          "title": "DOB Source date"
+          "title": "DOB Source date",
+          'searchable': false
         },
         { 
           "data": "units_res",
-          "title": "Residential Units"
+          "title": "Residential Units",
+          'searchable': false
         }
     ]
   });
