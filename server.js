@@ -15,10 +15,10 @@ app.set('view engine', 'jade');
 app.use(express.static(path.join(__dirname, 'public')));
 
 // routes
-var index = require('./routes/index');
-var table_page = require('./routes/table')
-app.use('/', index);
-app.use('/', table_page);
+var router = require('./routes/index');
+var table_draw = require('./routes/datatables')
+app.use('/', router);
+app.use('/', table_draw);
 
 //start server
 app.listen(3000);

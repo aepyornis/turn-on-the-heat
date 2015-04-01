@@ -12,6 +12,11 @@ router.get('/', function(req, res, next) {
   res.render('index', counts);
 });
 
+router.get('/table', function(req, res, next) {
+  res.render('table');
+});
+
+
 // router.get('/complaints', function(req,res,next){
 //   res.writeHead(200, {"Content-Type": "application/json"});
 //   res.send(JSON.strinigfy(complaints));
