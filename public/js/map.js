@@ -37,7 +37,6 @@ $(document).ready(function() {
     $('#hover-text').html('<p>Zoom in to get details</p>')
     map.on('zoomstart', function(e){ limit_zoom(); })
     datatable();
-    
 });
 
 function limit_zoom() {
@@ -56,7 +55,7 @@ function datatable() {
   // add classes for bootstrap style
   $('#complaints').addClass("table table-striped table-condensed table-hover")
   //do the datatable magic
-  $('#complaints').DataTable({
+  var table = $('#complaints').DataTable({
     data: top_100,
     "order": [[ 0, "desc" ]],
     columns: [
@@ -73,22 +72,10 @@ function datatable() {
           "title": "Owner Name (Pluto)"
         },
         { 
-          "data": "jobs_owner",
-          "title": "Owner (DOB)" 
-        },
-        { 
-          "data": "jobs_business",
-          "title": "Owner's Business (DOB)"
-
-        },
-        { 
-          "data": "jobs_date",
-          "title": "DOB Source date"
-        },
-        { 
           "data": "units_res",
           "title": "Residential Units"
         }
     ]
   });
+  table.columns.adjust().draw();
 }

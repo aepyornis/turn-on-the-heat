@@ -102,6 +102,10 @@
   font-size: 12px;
 }
 
+#complaints-table {
+  width: 70%;
+  margin: 0 auto;
+}
 
 #complaints thead {
   font-size: 13px;
