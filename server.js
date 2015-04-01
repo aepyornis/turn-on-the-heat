@@ -5,8 +5,6 @@ var utils = require('./utils');
 require('date-utils');
 // load complaints 
 // var complaints = load_complaints(Date.yesterday().toFormat('YYYY-MM-DD'));
-var routes = require('./routes/index');
-
 var app = express();
 
 // view engine setup
@@ -17,7 +15,10 @@ app.set('view engine', 'jade');
 app.use(express.static(path.join(__dirname, 'public')));
 
 // routes
-app.use('/', routes);
+var index = require('./routes/index');
+var table_page = require('./routes/table')
+app.use('/', index);
+app.use('/', table_page);
 
 //start server
 app.listen(3000);
