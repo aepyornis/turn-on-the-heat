@@ -10,6 +10,7 @@ html(lang='en')
     title Turn on the heat!
     link(href='css/bootstrap.min.css', rel='stylesheet')
     link(href='css/leaflet.css', rel='stylesheet')
+    link(href='css/jquery.dataTables.min.css', rel='stylesheet')
     link(href='css/style.css', rel='stylesheet')
   body
     nav.navbar.navbar-default
@@ -67,10 +68,12 @@ html(lang='en')
         h3 Complaints this week:  #{thisWeek}
         h3 Since the start of winter: #{winter}
     .container
-      h1 Whose responsible?
-      p These landlords....
+      h1 Top 100 buildings
+      #complaints-table
     script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js')
     script(src='js/bootstrap.min.js')
     script(src='js/leaflet.js')
     script(src='js/Leaflet.utfgrid.js')
+    script(src='js/top_100.js')
+    script(src='js/jquery.dataTables.min.js')
     script(src='js/map.js')

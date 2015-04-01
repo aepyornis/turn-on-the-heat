@@ -19,9 +19,8 @@ var heat = L.tileLayer('http://elephant-bird.net/tiles/heat/{z}/{x}/{y}.png', {m
 // utfgrid with heat data
 var heatGrid = new L.UtfGrid('http://elephant-bird.net/tiles/heat/{z}/{x}/{y}.json?callback={cb}', {});
 
-heatGrid.on('click', function (e) {
-     console.log('click')
-}); 
+// hack to change pointer
+heatGrid.on('click', function (e) {}); 
 
 heatGrid.on('mouseover', function (e) {
      var hoverText = '<p>Complaints: ' + e.data.total_comp + '<br>' + 'Address: ' + e.data.address + '</p>';
@@ -31,13 +30,15 @@ heatGrid.on('mouseout', function (e) {
       $('#hover-text').html('<p>Hover over a dot</p>')
 });
 
-
-map.addLayer(osm)
-map.addLayer(heat)
-$('#hover-text').html('<p>Zoom in to get details</p>')
-map.on('zoomstart', function(e){
-  limit_zoom();
-})
+// 
+$(document).ready(function() {
+    map.addLayer(osm)
+    map.addLayer(heat)
+    $('#hover-text').html('<p>Zoom in to get details</p>')
+    map.on('zoomstart', function(e){ limit_zoom(); })
+    datatable();
+    
+});
 
 function limit_zoom() {
   if (map.getZoom() >= 12 && !map.hasLayer(heatGrid)) {
@@ -47,4 +48,44 @@ function limit_zoom() {
     map.removeLayer(heatGrid);
     $('#hover-text').html('<p>Zoom in to hover</p>')
   }
+}
+
+function datatable() {
+  $('#complaints-table').html( '<table cellpadding="0" cellspacing="0" border="0" class="display" id="complaints"></table>' );
+  console.log(top_100)
+  $('#complaints').DataTable({
+    data: top_100,
+    "order": [[ 0, "desc" ]],
+    columns: [
+        { 
+        "data": "total_complaints",
+        "title": 'Total Complaints'
+        },
+        { 
+          "data": "address",
+          "title": "Address"
+        },
+        { 
+          "data": "pluto_owner" ,
+          "title": "Owner Name (Pluto)"
+        },
+        { 
+          "data": "jobs_owner",
+          "title": "Owner (DOB)" 
+        },
+        { 
+          "data": "jobs_business",
+          "title": "Owner's Business (DOB)"
+
+        },
+        { 
+          "data": "jobs_date",
+          "title": "DOB Source date"
+        },
+        { 
+          "data": "units_res",
+          "title": "Residential Units"
+        }
+    ]
+  });
 }
