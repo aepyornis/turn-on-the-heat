@@ -80,25 +80,19 @@ function psql_to_dt(rows) {
       newRow['jobs_date'] = date.slice(4,15);
     }
     titleize('address');
-    titleize('pluto_owner');
     titleize('jobs_owner');
     titleize('jobs_business');
     return newRow;
 
-      function titleize(columnName) {
-        if (row[columnName]) {
-            newRow[columnName] = s.titleize(row[columnName].toLowerCase());
-          } else {
-            return;
-        }
+    function titleize(columnName) {
+      if (row[columnName]) {
+          newRow[columnName] = s.titleize(row[columnName].toLowerCase());
+        } else {
+          return;
       }
+    }
   }
-
-  
-
 }
-
-
 
 // {dt request object} -> 'sql query'
 function sql_query_builder(dt) {

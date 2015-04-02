@@ -1,9 +1,22 @@
 extends layout.jade
 block content
-  h1 table here
+  h1 2014-2015 Heat Complaints Searchable Table
   #complaints-table
+  h2 How to use:
+  p You can page through the see buildings and their owners containing heat complaints this year. 
+  p Use the search bar to look up a particular owner or building. 
+  h3 Onwership data: Owner Names and LLCs!!?
+  p Many buildings are owned by LLCs or corporations, hiding the names of the people behind the companies. Many tenants don't even know the 'real' name of the owner of their apartment or who is responsible for not proving them with essential services.
+  p This table matchs data from NYC
+  p These names come with a cavet: they might not be up-to-date or 100% accurate. The date of the most recent permit (listed as 'DOB source data') should give you a sense of how-up-to-date the information is. Click <a href="http://dobjobs-elephantbird.rhcloud.com/" target="_blank">here</a> for a searchable version of that datasource.
+
+
+
   script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js')
   script(src='js/bootstrap.min.js')
   script(src='js/jquery.dataTables.min.js')
   script(src='js/dataTables.bootstrap.min.js')
   script(src='js/table.js')
+
+| The <a href="http://www.nyc.gov/html/dcp/html/bytes/applbyte.shtml#pluto" target="_blank">"pluto"</a> data is a dataset published by the New York City Deparment of Planning, 
+    | which retrives its ownership information from the Department of Finance. This contains the 'legal' owner name as recorded on <a href="http://a836-acris.nyc.gov/CP/" target="_blank">ACRIS</a>.
