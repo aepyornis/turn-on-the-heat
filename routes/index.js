@@ -2,10 +2,12 @@ var express = require('express');
 var router = express.Router();
 var utils = require('../utils');
 
+
 var counts;
-utils.count_dictionary(function(obj){
-  counts = obj;
-});
+set_counts();
+// update the counts twice a day
+setInterval(set_counts, 43200);
+
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -17,9 +19,11 @@ router.get('/table', function(req, res, next) {
 });
 
 
-// router.get('/complaints', function(req,res,next){
-//   res.writeHead(200, {"Content-Type": "application/json"});
-//   res.send(JSON.strinigfy(complaints));
-// });
-
 module.exports = router;
+
+
+function set_counts() {
+    utils.count_dictionary(function(obj){
+        counts = obj;
+    });
+}
