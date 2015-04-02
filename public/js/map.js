@@ -19,7 +19,7 @@ var heat = L.tileLayer('http://elephant-bird.net/tiles/heat/{z}/{x}/{y}.png', {m
 // utfgrid with heat data
 var heatGrid = new L.UtfGrid('http://elephant-bird.net/tiles/heat/{z}/{x}/{y}.json?callback={cb}', {});
 
-// hack to change pointer
+//change pointer
 heatGrid.on('click', function (e) {}); 
 
 heatGrid.on('mouseover', function (e) {
@@ -30,7 +30,6 @@ heatGrid.on('mouseout', function (e) {
       $('#hover-text').html('<p>Hover over a dot</p>')
 });
 
-// 
 $(document).ready(function() {
     map.addLayer(osm)
     map.addLayer(heat)

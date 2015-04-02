@@ -1,3 +1,7 @@
+p {
+  font-size: 1.1em;
+}
+
 #map {
   height: 520px;
   width: 95%;

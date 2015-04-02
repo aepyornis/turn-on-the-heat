@@ -21,13 +21,20 @@ html(lang='en')
             span.icon-bar
             span.icon-bar
             span.icon-bar
-          a.navbar-brand(href='#') Turn-On-The-Heat
+          a.navbar-brand(href='/') Turn On The Heat
         #navbar.collapse.navbar-collapse
           ul.nav.navbar-nav
             li.active
-              a(href='#') Map
+              a(href='/#') Map
             li
-              a(href='#about') Worst Offenders
+              a(href='/#worst') Worst Offenders
             li
-              a(href='#contact') Data
+              a(href='/#info') Info
+            li
+              a(href="/table") Full table
+    script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js')
+    script(src='js/bootstrap.min.js')
+    script(src='js/jquery.dataTables.min.js')
+    script(src='js/dataTables.bootstrap.min.js')
+    script(src='js/navbar.js')
     block content

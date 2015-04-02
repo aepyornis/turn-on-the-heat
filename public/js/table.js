@@ -1,7 +1,8 @@
 $(document).ready(function() {
     datatable();
+    //nav bar
+    activate(4);
 });
-
 
 function datatable() {
   //create table html

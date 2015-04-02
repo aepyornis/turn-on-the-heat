@@ -36,32 +36,22 @@ block content
             .c7.circle
             p.legend-text >100
   .container
-    h3.text-center Since the start of winter: #{winter}
+    h3.text-center Total complaints since the start of winter: #{winter}
     h3.text-center Complaints this week:  #{thisWeek}
-    h3.text-center Complaints yesterday:  #{yesterday}
+    //- h3.text-center Complaints yesterday:  #{yesterday}
   .container
-    <a name="about"></a>
+    <a name="worst"></a>
     h1.text-center Worst Offenders: The Top 100 buildings
     #complaints-table
-    h2 Heat Complaints
+    h2 <a name="info"></a>Heat Complaints
     p From October 1st and May 1st, property owners <a href="http://www1.nyc.gov/site/hpd/renters/important-safety-issues-heat-hot-water.page" target="_blank">must provide</a> adequate heat. Technically <a href="http://metcouncilonhousing.org/help_and_answers/heat_and_hot_water" target="_blank">landlords can be fined</a> for their negligence, yet they rarely get in trouble for what should be dangerous criminal activity.
     P When faced with dangerous freezing conditions, tenants have few options: report it to the overworked Department of Housing and Presenvation via 311 and/or attempt to get repairs through our shamefully ineffectual housing court system.
     <a name="name"></a>
-    h2 About the data
-    h3 Heat complaints:
-    p The 311 complaints are available on <a href="https://data.cityofnewyork.us/Social-Services/311-Service-Requests-from-2010-to-Present/erm2-nwe9" target="_blank">NYC Open Data.</a>
-    h3 Onwership data: Owner Names and LLCs!!?
-    p The <a href="http://www.nyc.gov/html/dcp/html/bytes/applbyte.shtml#pluto" target="_blank">"pluto"</a> data is a dataset published by the New York City Deparment of Planning, which retrives its ownership information from the Department of Finance. This contains the 'legal' owner name as recorded on <a href="http://a836-acris.nyc.gov/CP/" target="_blank">ACRIS</a>.
-    p However, these are often LLCs or corporations, hiding the names of the people behind the companies. Many tenants don't even know the 'real' name of the owner of their apartment or who is responsible for not proving them with essential services.
-    p These names come with a cavet: they might not be up-to-date or 100% accurate. The date of the most recent permit (listed as 'DOB source data') should give you a sense of how-up-to-date the information is. Click <a href="http://dobjobs-elephantbird.rhcloud.com/" target="_blank">here</a> for a searchable version of that datasource.
-    h3 What's next?
+    p 311 complaints are available on <a href="https://data.cityofnewyork.us/Social-Services/311-Service-Requests-from-2010-to-Present/erm2-nwe9" target="_blank">NYC Open Data.</a>
+    p Interested in who is behind those LLCs? <a href="/table">See the full table</a>.
     p Check back for more analysis and further investigation into the worst offenders. 
     p.lead Meanwhile join the chorus of NYC's tenant by telling these landlords to: TURN ON THE HEAT! 
-  script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js')
-  script(src='js/bootstrap.min.js')
   script(src='js/leaflet.js')
   script(src='js/Leaflet.utfgrid.js')
   script(src='js/top_100.js')
-  script(src='js/jquery.dataTables.min.js')
-  script(src='js/dataTables.bootstrap.min.js')
   script(src='js/map.js')

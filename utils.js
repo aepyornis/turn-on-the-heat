@@ -1,6 +1,7 @@
 var request = require('request');
 var fs = require('fs');
 var Q = require('q');
+require('date-utils');
 
 // input: 'YYYY-MM-DD' -> callback (arr of complaints)
 // downloads complaints, writes them to file

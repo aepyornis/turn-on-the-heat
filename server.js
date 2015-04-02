@@ -2,9 +2,7 @@ var fs = require('fs');
 var express = require('express');
 var path = require('path');
 var utils = require('./utils');
-require('date-utils');
-// load complaints 
-// var complaints = load_complaints(Date.yesterday().toFormat('YYYY-MM-DD'));
+
 var app = express();
 
 // view engine setup
@@ -20,22 +18,27 @@ var table_draw = require('./routes/datatables')
 app.use('/', router);
 app.use('/', table_draw);
 
-//start server
-app.listen(3000);
-console.log('server started at localhost');
+var server_port = process.env.OPENSHIFT_NODEJS_PORT || '3000';
+var server_ip_address = process.env.OPENSHIFT_NODEJS_IP || 'localhost';
+
+var server = app.listen(server_port, server_ip_address, function () {
+  var host = server.address().address;
+  var port = server.address().port;
+  console.log('app listening at http://%s:%s', host, port)
+})
 
 //  'YYYY-MM-DD' -> []
 // downloads the complaints  or loads them from file
-function load_complaints(date) {
-  fs.readFile(('./data/json/' + date + '.txt'), function(err, data) {
-      if (err) {
-          console.log('no file...starting to download')
-          utils.download_complaints(date, function(arr){
-              return arr;
-          })
-      } else {
-          console.log('already downloaded these');
-          return JSON.parse(data);
-      }
-  })
-}
+// function load_complaints(date) {
+//   fs.readFile(('./data/json/' + date + '.txt'), function(err, data) {
+//       if (err) {
+//           console.log('no file...starting to download')
+//           utils.download_complaints(date, function(arr){
+//               return arr;
+//           })
+//       } else {
+//           console.log('already downloaded these');
+//           return JSON.parse(data);
+//       }
+//   })
+// }

@@ -9,9 +9,10 @@ var squel = require('squel')
   squel.count = require('./count_squel')
 var pg = require('pg');
   pg.defaults.database = 'heat311';
-  pg.defaults.host = 'localhost';
-  pg.defaults.user = 'mrbuttons';
-  pg.defaults.password = 'mrbuttons';
+  pg.defaults.host = process.env.OPENSHIFT_POSTGRESQL_DB_HOST || 'localhost';
+  pg.defaults.user = process.env.OPENSHIFT_POSTGRESQL_DB_USERNAME || 'mrbuttons';
+  pg.defaults.password = process.env.OPENSHIFT_POSTGRESQL_DB_PASSWORD || 'mrbuttons';
+  if (process.env.OPENSHIFT_POSTGRESQL_DB_PORT) { pg.defaults.port = process.env.OPENSHIFT_POSTGRESQL_DB_PORT }
 
 /* GET home page. */
 
@@ -59,7 +60,7 @@ function do_query(sql) {
             def.reject(err);
             console.log(err);
           }
-          def.resolve(psql_to_dt(result.rows));
+          def.resolve(stylize_result(result.rows));
           done();
         })
       }
@@ -67,7 +68,9 @@ function do_query(sql) {
   return def.promise;
 }
 
-function psql_to_dt(rows) {
+// [] -> []
+// stylizes the result from postgres, 
+function stylize_result(rows) {
 
   return _.map(rows, function(row){
       return change_row(row);
@@ -81,7 +84,6 @@ function psql_to_dt(rows) {
     }
     titleize('address');
     titleize('jobs_owner');
-    titleize('jobs_business');
     return newRow;
 
     function titleize(columnName) {
