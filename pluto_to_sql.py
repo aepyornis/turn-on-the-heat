@@ -9,6 +9,7 @@ create_table = """CREATE TABLE pluto (
     numfloords integer,
     unitsres integer,
     yearbuilt integer,
+    borocode integer,
     bbl numeric
 );"""
 
@@ -27,7 +28,7 @@ def double_quotes(index, field):
 def insert_statement(row):
     # select these fields from pluto
     # CD, BldgClass, OwnerName, NumFloors, UnitsRes, YearBuilt, BBL
-    selected = [3, 25, 29, 42, 43, 58, 69]
+    selected = [3, 25, 29, 42, 43, 58, 68, 69]
     reduced = [row[i] for i in selected]
     # double quotes for sql
     doubled = [double_quotes(index, field) for index, field in enumerate(reduced)]
