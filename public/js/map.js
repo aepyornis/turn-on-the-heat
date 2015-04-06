@@ -66,6 +66,10 @@ function datatable() {
           "data": "address",
           "title": "Address"
         },
+        {
+          "data": "boro",
+          "title": "Borough"
+        },
         { 
           "data": "pluto_owner" ,
           "title": "Owner Name (Pluto)"

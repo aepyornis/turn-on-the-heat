@@ -178,15 +178,19 @@ CREATE TABLE super_complaints AS (SELECT c.bbl AS bbl,
        pluto.unitsres AS units_res,
        pluto.borocode AS boro,
        c.total_complaints AS total_complaints,
-       c2.latitude AS lat,
-       c2.longitude AS lng
+       c.latitude AS lat,
+       c.longitude AS lng
 FROM
    (SELECT complaints.address,
           count(complaints.bbl) AS total_complaints,
-          complaints.bbl
+          complaints.bbl,
+          complaints.longitude,
+          complaints.latitude
     FROM complaints
     GROUP BY complaints.address,
-             complaints.bbl) AS c
+             complaints.bbl,
+             complaints.longitude,
+              complaints.latitude) AS c
     LEFT JOIN
         (SELECT *
          FROM
@@ -198,6 +202,5 @@ FROM
             FROM dobjobs
             ORDER BY bbl) AS dob
         ORDER BY dob.latestactiondate DESC ) AS jobs ON c.bbl = jobs.bbl
-LEFT JOIN pluto ON c.bbl = pluto.bbl
-LEFT JOIN (SELECT longitude, latitude FROM complaints as c ON c.2bbl = c2.bbl
+    LEFT JOIN pluto ON c.bbl = pluto.bbl
 ORDER BY total_complaints DESC);

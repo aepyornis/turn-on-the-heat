@@ -21,7 +21,7 @@ router.get('/datatables', function(req, res, next){
   var response = {};
   response.draw = req.query.draw;
   // total number of records in database.
-  response.recordsTotal = '34445';
+  response.recordsTotal = '35637';
   
   //create SQL query 
   var sql_query = sql_query_builder(req.query);
@@ -101,7 +101,7 @@ function sql_query_builder(dt) {
   // sequel select object
   var query = squel.mySelect();
 
-  query.from('complaints_by_building')
+  query.from('super_complaints')
     .where( where_exp(dt) )
 
   // order dir
@@ -123,7 +123,7 @@ function sql_query_builder(dt) {
 function sql_count_builder(dt) {
   // sequel select object
   return squel.count()
-    .from('complaints_by_building')
+    .from('super_complaints')
     .where( where_exp(dt) )
     .toParam()
 }
