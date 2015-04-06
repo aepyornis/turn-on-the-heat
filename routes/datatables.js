@@ -84,7 +84,16 @@ function stylize_result(rows) {
     }
     titleize('address');
     titleize('jobs_owner');
+    filter_out_good_guys(row.jobs_business);
     return newRow;
+
+    function filter_out_good_guys(bis) {
+      if (/deli|EQUIPMENT LEASING|GROCERY/gi.test(bis)) {
+        newRow.jobs_owner = '';
+        newRow.jobs_date = '';
+        newRow.jobs_business = '';
+      } 
+    }
 
     function titleize(columnName) {
       if (row[columnName]) {

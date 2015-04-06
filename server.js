@@ -27,18 +27,3 @@ var server = app.listen(server_port, server_ip_address, function () {
   console.log('app listening at http://%s:%s', host, port)
 })
 
-//  'YYYY-MM-DD' -> []
-// downloads the complaints  or loads them from file
-// function load_complaints(date) {
-//   fs.readFile(('./data/json/' + date + '.txt'), function(err, data) {
-//       if (err) {
-//           console.log('no file...starting to download')
-//           utils.download_complaints(date, function(arr){
-//               return arr;
-//           })
-//       } else {
-//           console.log('already downloaded these');
-//           return JSON.parse(data);
-//       }
-//   })
-// }
