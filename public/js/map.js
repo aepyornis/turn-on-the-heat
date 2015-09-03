@@ -14,10 +14,10 @@ var osm = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
 });
 
 //heat complaints layer
-var heat = L.tileLayer('http://{s}.elephant-bird.net/tiles/heat/{z}/{x}/{y}.png', {minZoom: 10, maxZoom: 15});
+var heat = L.tileLayer('http://{s}.elephant-bird.net/heat/{z}/{x}/{y}.png', {minZoom: 10, maxZoom: 15});
 
 // utfgrid with heat data
-var heatGrid = new L.UtfGrid('http://{s}.elephant-bird.net/tiles/heat/{z}/{x}/{y}.json?callback={cb}', {});
+var heatGrid = new L.UtfGrid('http://{s}.elephant-bird.net/heat/{z}/{x}/{y}.json?callback={cb}', {});
 
 //change pointer
 heatGrid.on('click', function (e) {}); 
